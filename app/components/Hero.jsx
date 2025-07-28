@@ -102,6 +102,7 @@ export default function Hero() {
         <div className="rounded-t-2xl overflow-hidden">
           <div className="self-stretch h-[290px] relative bg-[#ffffff] opacity-[0.1] " />
         </div>
+        {/* second heading */}
         <div className="px-5">
           <h2 className="text-3xl font-bold capitalize ">
             Experience Life balance Tool

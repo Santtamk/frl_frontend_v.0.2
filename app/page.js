@@ -3,11 +3,9 @@
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 
-
-
 export default function Home() {
-  return (
 
+  return (
     <div className="min-h-screen bg-custom-gradient text-[#F6F6F6] overflow-hidden px-2 lg:px-7 ">
       <Header />
       <div
