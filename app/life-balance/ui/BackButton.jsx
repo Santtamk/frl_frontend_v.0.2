@@ -5,15 +5,15 @@ import { useRouter } from "next/navigation";
 
 import React from "react";
 
-const BackButton = ({ slideCount, setSlideCount }) => {
+const BackButton = ({ slideIndex, setSlideIndex }) => {
   const router = useRouter();
   const gotToPreviousScreen = () => {
     // If on the first slide, go to /resource
-    if (slideCount === 1) {
+    if (slideIndex === 0) {
       router.push("/");
       // If on the first slide, go to /resource
-    } else if (slideCount > 1 && slideCount <= 11) {
-      setSlideCount((prev) => prev - 1);
+    } else if (slideIndex > 0 && slideIndex <= 11) {
+      setSlideIndex((prev) => prev - 1);
     }
   };
 
