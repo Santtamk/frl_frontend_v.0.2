@@ -5,18 +5,27 @@ import BackButton from "./ui/BackButton";
 import slidesData from "./slides/slidesData";
 import IntroSlides from "./slides/IntroSlides";
 import FormSlide from "./slides/FormSlide";
+import QuestionSlides from "./slides/QuestionSlides";
+import Results from "./wheel/Results";
 
 const LifeBalancePage = () => {
   const [slideIndex, setSlideIndex] = useState(0);
-  const [fromValues, setFormVales] = useState({ location: "", pinCode: "" });
+  const [formValues, setFormVales] = useState({ location: "", pinCode: "" });
+  const [answers, setAnswers] = useState([]);
 
   const currentSlide = slidesData[slideIndex];
+  const isResults = slideIndex >= slidesData.length;
 
   const fromData = (location, pinCode) => {
     setFormVales({ location, pinCode });
   };
 
-  console.log(`fromValues: ${JSON.stringify(fromValues)}`);
+  const answerCollector = (ans) => {
+    setAnswers((prev) => [...prev, ans]);
+  };
+
+  console.log(`formValues: ${JSON.stringify(formValues)}`);
+  console.log(`answers: ${answers}`);
 
   return (
     <div className="h-dvh bg-[#19667A] flex justify-center">
@@ -27,30 +36,38 @@ const LifeBalancePage = () => {
         </div>
 
         <div className="flex flex-col justify-start h-full flex-1 gap-4 lg:flex-row-reverse ">
-          {/* intro screen */}
-          {currentSlide.type === "intro" && (
-            <IntroSlides
-              header={currentSlide.header}
-              paragraph={currentSlide.paragraph}
-              setSlideIndex={() => setSlideIndex(slideIndex + 1)}
-              image={currentSlide.image}
-            />
+          {!isResults && currentSlide && (
+            <>
+              {currentSlide.type === "intro" && (
+                <IntroSlides
+                  header={currentSlide.header}
+                  paragraph={currentSlide.paragraph}
+                  setSlideIndex={() => setSlideIndex(slideIndex + 1)}
+                  image={currentSlide.image}
+                />
+              )}
+              {currentSlide.type === "form" && (
+                <FormSlide
+                  header={currentSlide.header}
+                  setSlideIndex={() => setSlideIndex(slideIndex + 1)}
+                  fromDataCallBack={fromData}
+                />
+              )}
+              {currentSlide.type === "question" && (
+                <QuestionSlides
+                  header={currentSlide.question}
+                  setSlideIndex={() => setSlideIndex(slideIndex + 1)}
+                  answerCollector={answerCollector}
+                  slideIndex={slideIndex}
+                />
+              )}
+            </>
           )}
-          {/* form screen */}
-          {currentSlide.type === "form" && (
-            <FormSlide
-              header={currentSlide.header}
-              setSlideIndex={() => setSlideIndex(slideIndex + 1)}
-              fromDataCallBack={fromData}
-            />
+
+          {isResults && (
+            // <Results answers={answers} formValues={formValues} />
+            <BalanceWheel answers={answers} formValues={formValues} />
           )}
-          {/* question screen */}
-          {/* {currentSlide.type === "question" && (
-            <FormSlide
-              header={currentSlide.header}
-              setSlideIndex={() => setSlideIndex(slideIndex + 1)}
-            />
-          )} */}
         </div>
       </div>
     </div>

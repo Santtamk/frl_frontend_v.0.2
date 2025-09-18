@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 882 874">
+  <title>Balance Wheel Base</title>
+  <desc>Base SVG for the Life Balance Wheel overlay. Center at (441,437).</desc>
+  <defs>
+    <style>
+      .bg { fill: #0F3A46; }
+      .ring { fill: none; stroke: #114b59; stroke-width: 2; opacity: .6; }
+      .spoke { stroke: #114b59; stroke-width: 2; opacity: .5; }
+    </style>
+  </defs>
+  <!-- Background rounded shape -->
+  <rect x="41" y="33" rx="200" ry="200" width="800" height="800" class="bg" />
+
+  <!-- Concentric rings around center (441,437) to give structure) -->
+  <circle cx="441" cy="437" r="130" class="ring" />
+  <circle cx="441" cy="437" r="160" class="ring" />
+  <circle cx="441" cy="437" r="190" class="ring" />
+  <circle cx="441" cy="437" r="220" class="ring" />
+  <circle cx="441" cy="437" r="250" class="ring" />
+  <circle cx="441" cy="437" r="280" class="ring" />
+  <circle cx="441" cy="437" r="310" class="ring" />
+  <circle cx="441" cy="437" r="340" class="ring" />
+  <circle cx="441" cy="437" r="370" class="ring" />
+  <circle cx="441" cy="437" r="400" class="ring" />
+
+  <!-- 8 spokes at 0,45,... degrees -->
+  <g>
+    <!-- Up (0deg) -->
+    <line x1="441" y1="437" x2="441" y2="37" class="spoke" />
+    <!-- 45deg -->
+    <line x1="441" y1="437" x2="723.4" y2="154.6" class="spoke" />
+    <!-- 90deg -->
+    <line x1="441" y1="437" x2="841" y2="437" class="spoke" />
+    <!-- 135deg -->
+    <line x1="441" y1="437" x2="723.4" y2="719.4" class="spoke" />
+    <!-- 180deg -->
+    <line x1="441" y1="437" x2="41" y2="437" class="spoke" />
+    <!-- 225deg -->
+    <line x1="441" y1="437" x2="158.6" y2="719.4" class="spoke" />
+    <!-- 270deg -->
+    <line x1="441" y1="437" x2="441" y2="837" class="spoke" />
+    <!-- 315deg -->
+    <line x1="441" y1="437" x2="158.6" y2="154.6" class="spoke" />
+  </g>
+
+  <!-- Optional overlay container the app will target -->
+  <g id="data-overlay"></g>
+</svg>
+
