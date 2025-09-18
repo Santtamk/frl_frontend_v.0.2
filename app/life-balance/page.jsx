@@ -65,8 +65,7 @@ const LifeBalancePage = () => {
           )}
 
           {isResults && (
-            // <Results answers={answers} formValues={formValues} />
-            <BalanceWheel answers={answers} formValues={formValues} />
+            <Results answers={answers} formValues={formValues} />
           )}
         </div>
       </div>
