@@ -13,14 +13,6 @@ const FormSlide = ({ header, setSlideIndex, fromDataCallBack }) => {
     setSlideIndex();
   };
 
-  useEffect(() => {
-    console.log(
-      `this is new location ${location}
-    this is for ${pinCode}`
-    );
-  }, [location, pinCode]);
-
-  
   return (
     <>
       <div className="flex justify-center items-center content-center text-center lg:w-1/2">

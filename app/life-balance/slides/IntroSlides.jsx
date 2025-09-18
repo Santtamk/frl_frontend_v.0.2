@@ -9,16 +9,18 @@ import BalanceImage from "./BalanceImage";
 // 4 to 11 is question
 const IntroSlides = ({ header, paragraph, setSlideIndex, image }) => {
   return (
-    <>
+    <div className="flex flex-col lg:flex-row-reverse justify-between h-full  gap-8 pt-10">
       <div className="flex justify-center lg:w-1/2">
         <BalanceImage image={image} />
       </div>
       <div className="flex flex-col justify-between h-full flex-1 lg:w-1/2 lg:justify-center lg:items-start lg:gap-7">
         <div className="capitalize">
-          <div className="font-semibold text-3xl pb-2 lg:text-5xl lg:font-bold">
+          <div className="font-semibold text-3xl pb-2 lg:text-5xl lg:font-bold text-center">
             {header}
           </div>
-          <p className="font-medium text-base lg:text-xl">{paragraph}</p>
+          <p className="font-medium text-base lg:text-xl text-center">
+            {paragraph}
+          </p>
         </div>
         {/* next button */}
         <div className="flex items-baseline justify-end  lg:justify-start lg:items-start">
@@ -31,7 +33,7 @@ const IntroSlides = ({ header, paragraph, setSlideIndex, image }) => {
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

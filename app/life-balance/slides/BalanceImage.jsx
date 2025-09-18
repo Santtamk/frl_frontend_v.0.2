@@ -1,6 +1,12 @@
+"use client";
 import Image from "next/image";
 import React from "react";
-import Lottie from "@lottielab/lottie-player/react";
+import dynamic from "next/dynamic";
+
+// Lottie player can reference window/document; load only on client
+const Lottie = dynamic(() => import("@lottielab/lottie-player/react"), {
+  ssr: false,
+});
 
 const BalanceImage = ({ image }) => {
   return (

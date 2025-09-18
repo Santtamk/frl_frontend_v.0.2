@@ -30,6 +30,11 @@ const slidesData = [
   },
   {
     type: "question",
+    question:
+      "How Satisfied are you in relationship with friends and family right now?",
+  },
+  {
+    type: "question",
     question: "How Satisfied are you with romance in your life right now?",
   },
   {
