@@ -1,6 +1,7 @@
 "use client";
 import React, { useMemo, useRef, useState } from "react";
 import BalanceWheel from "./BalanceWheel";
+import { Download, Share2 } from "lucide-react";
 
 // Maps the ordered answers array to the BalanceWheel formData contract
 const toFormData = (answers = []) => {
@@ -26,6 +27,13 @@ const Results = ({ answers, formValues }) => {
 
   const formData = useMemo(() => toFormData(answers), [answers]);
 
+  // Display date in dd/mm/yyyy
+  const today = new Date();
+  const dd = String(today.getDate()).padStart(2, "0");
+  const mm = String(today.getMonth() + 1).padStart(2, "0");
+  const yyyy = today.getFullYear();
+  const displayDate = `${dd}/${mm}/${yyyy}`;
+
   const handleDownload = async () => {
     try {
       setDownloading(true);
@@ -41,33 +49,90 @@ const Results = ({ answers, formValues }) => {
     }
   };
 
+  const handleShare = async () => {
+    const shareData = {
+      title: "My Life Balance Wheel",
+      text: "Check out my Life Balance Wheel snapshot. How balanced are you feeling today?",
+      url: typeof window !== "undefined" ? window.location.href : undefined,
+    };
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else if (navigator.clipboard && shareData.url) {
+        await navigator.clipboard.writeText(shareData.url);
+        alert("Link copied to clipboard");
+      } else {
+        alert("Sharing not supported on this device.");
+      }
+    } catch (e) {
+      // Swallow user-cancel
+    }
+  };
+
   return (
-    <div className="flex flex-col lg:flex-row-reverse items-center gap-6 lg:gap-10 w-full h-full">
-      <div className="flex justify-center items-center lg:w-1/2">
-        <div className="w-[85vw] max-w-[700px] aspect-square">
+    <div className="w-full h-full overflow-hidden flex flex-col lg:flex-row-reverse items-stretch gap-6 lg:gap-10">
+      {/* Wheel section */}
+      <div className="flex justify-center lg:justify-end items-center lg:w-1/2 flex-shrink-0 overflow-visible">
+        <div className="relative aspect-square w-[320px] h-[320px] md:w-[520px] md:h-[520px] lg:w-[720px] lg:h-[720px] xl:w-[820px] xl:h-[820px] lg:translate-x-6 xl:translate-x-10">
           <BalanceWheel formData={formData} graphRef={graphRef} />
         </div>
       </div>
 
-      <div className="flex flex-col gap-4 flex-1 lg:w-1/2 lg:justify-center lg:items-start">
+      {/* Text + actions */}
+      <div className="flex flex-col gap-4 flex-1 justify-start lg:justify-center lg:items-start overflow-hidden">
         <div className="capitalize">
-          <div className="font-semibold text-3xl pb-2 lg:text-5xl lg:font-bold text-white">
-            Your Balance Wheel
+          <div className="font-bold text-4xl md:text-5xl pb-2 text-white">
+            Your Life Balance Wheel
           </div>
-          <p className="font-medium text-base lg:text-xl text-white/90">
-            Country: {formValues?.location || "-"} | ZIP: {formValues?.pinCode || "-"}
-          </p>
+          <div className="text-white font-semibold tracking-wide text-2xl md:text-4xl">
+            On {displayDate}
+          </div>
         </div>
 
-        <div className="flex gap-3">
+        {/* Supporting text */}
+        <p className="font-medium text-base md:text-lg text-white/90 max-w-[36rem]">
+          This is your current life balance wheel. Scores may shift hourly,
+          daily, or weekly. Don’t seek ultimate truth — just notice how you feel
+          right now.
+        </p>
+
+        {/* Optional location line */}
+        {Boolean(formValues?.location || formValues?.pinCode) && (
+          <p className="text-white/70 text-sm lg:text-base">
+            Country: {formValues?.location || "-"} | ZIP:{" "}
+            {formValues?.pinCode || "-"}
+          </p>
+        )}
+
+        <div className="flex gap-3 pt-3">
           <button
             onClick={handleDownload}
             disabled={downloading}
-            className="flex justify-center items-center gap-[0.6rem] font-medium text-base text-[#2D201B] bg-[#F6F5F0] rounded-3xl px-[1.25rem] py-[0.6rem] lg:text-xl hover:scale-105 disabled:opacity-70 disabled:hover:scale-100 transition-all"
+            className="flex items-center gap-2 font-medium text-base text-[#2D201B] bg-[#F6F5F0] rounded-full px-5 py-3 lg:text-lg hover:scale-105 disabled:opacity-70 disabled:hover:scale-100 transition-all"
+            aria-label="Download"
           >
-            {downloading ? "Preparing..." : "Download Image"}
+            <span>{downloading ? "Preparing..." : "Download"}</span>
+            <Download className="w-4 h-4" />
+          </button>
+          <button
+            onClick={handleShare}
+            className="flex items-center gap-2 font-medium text-base text-[#EEFCFD] border border-[#EEFCFD]/40 rounded-full px-5 py-3 lg:text-lg hover:scale-105 transition-all"
+            aria-label="Share"
+          >
+            <span>Share</span>
+            <Share2 className="w-4 h-4" />
           </button>
         </div>
+
+        {/* Footer credit */}
+        <p className="mt-6 text-[11px] leading-snug text-white/70 max-w-[36rem]">
+          The Life Balance Wheel Tool has been developed by the Academy of
+          Leadership Coaching & NLP (ALCN). To know more about this work please
+          visit
+          <span className="px-1 underline decoration-white/50 underline-offset-2">
+            https://nlp-leadership-coaching.com/
+          </span>
+        </p>
       </div>
     </div>
   );

@@ -23,7 +23,7 @@ const BackButton = ({ slideIndex, setSlideIndex }) => {
 
   return (
     <>
-      <div className="flex justify-between">
+      <div className="flex justify-between z-10">
         <button
           className="w-[3.125rem] h-[3.125rem]  lg:h-[5rem] lg:w-[5rem] bg-[#EEFCFD] rounded-full flex justify-center items-center hover:bg-[#D9F5F7] transition-all duration-200 cursor-pointer hover:scale-105"
           onClick={gotToPreviousScreen}

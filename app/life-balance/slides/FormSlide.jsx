@@ -15,8 +15,8 @@ const FormSlide = ({ header, setSlideIndex, fromDataCallBack }) => {
 
   return (
     <>
-      <div className="flex justify-center items-center content-center text-center lg:w-1/2">
-        <div className="bg-[#F6F5F0] w-[15.625rem] h-[15.625rem] lg:w-[35.75rem] lg:h-[35.75rem] rounded-full" />
+      <div className="flex justify-center items-center content-center text-center lg:w-1/2 ">
+        <div className="bg-[#F6F5F0] w-[15.625rem] h-[15.625rem] lg:w-[30.75rem] lg:h-[30.75rem] rounded-full" />
       </div>
       <form
         className="flex flex-col justify-between gap-5 h-full lg:w-1/2 lg:justify-center lg:items-start lg:gap-7 capitalize"
@@ -61,7 +61,7 @@ const FormSlide = ({ header, setSlideIndex, fromDataCallBack }) => {
 
         {/* next button */}
         <div className="flex items-baseline justify-end lg:justify-start lg:items-start">
-          <button className="flex justify-center items-center gap-[0.6rem] font-medium text-base text-[#2D201B] bg-[#F6F5F0] rounded-3xl px-[1.75rem] py-[0.75rem] lg:text-xl hover:scale-105 cursor-pointer transition-all">
+          <button className="flex justify-center items-center gap-[0.6rem] font-medium text-base text-[#2D201B] bg-[#F6F5F0] rounded-3xl px-[1.75rem] py-[0.75rem] lg:text-xl cursor-pointer transition-all">
             Next
             <ArrowRight className="w-[1.5rem] h-[1.3rem]" />
           </button>

@@ -29,13 +29,13 @@ const LifeBalancePage = () => {
 
   return (
     <div className="h-dvh bg-[#19667A] flex justify-center">
-      <div className="px-5 py-5 lg:px-10 lg:py-10 max-w-[1500px] w-full flex flex-col">
+      <div className="px-5 py-5 lg:px-10 lg:py-10 max-w-[1400px] w-full flex flex-col">
         {/* back button */}
         <div className="">
           <BackButton setSlideIndex={setSlideIndex} slideIndex={slideIndex} />
         </div>
 
-        <div className="flex flex-col justify-start h-full flex-1 gap-4 lg:flex-row-reverse ">
+        <div className="flex flex-col justify-start h-full flex-1 gap-4 lg:flex-row-reverse overflow-y-hidden z-50 ">
           {!isResults && currentSlide && (
             <>
               {currentSlide.type === "intro" && (
@@ -64,9 +64,7 @@ const LifeBalancePage = () => {
             </>
           )}
 
-          {isResults && (
-            <Results answers={answers} formValues={formValues} />
-          )}
+          {isResults && <Results answers={answers} formValues={formValues} />}
         </div>
       </div>
     </div>
